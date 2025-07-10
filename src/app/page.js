@@ -11,6 +11,7 @@ export default function Home() {
   const [checkInButtonLoading, setCheckInButtonLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [lastCheckIn, setLastCheckIn] = useState(null);
+  const [firstName, setFirstName] = useState(null);
   
   const router = useRouter();
 
@@ -53,9 +54,14 @@ export default function Home() {
           return;
         }
 
-        const result = await fetch('https://livinglegacy.fly.dev/last_check_in', {
+        const result = await fetch('https://livinglegacy.fly.dev/user_details', {
           headers: { Authorization: `Bearer ${token}` }
         });
+
+        if (!result.ok) {
+          console.log(await result.text());
+          throw Error('Failed to fetch data');
+        }
         
         const data = await result.json();
 
@@ -66,6 +72,7 @@ export default function Home() {
 
         setLastCheckIn(daysPassed);
         setProgress((totalTime - daysPassed) * 100 / totalTime);
+        setFirstName(data.first_name);
       } catch (err) {
         console.error('Failed to fetch check in:', err);
       } finally {
@@ -99,9 +106,12 @@ export default function Home() {
     </motion.div>
   );
 
+  const Header = ({name}) => (
+        <h1 className="text-4xl sm:text-5xl w-full text-center font-semibold mb-12 text-cyan-950">{ name ? "Welcome, " + name : "Welcome back"}</h1>
+  )
+
     const UpperPortion = () => (
       <>
-        <h1 className="text-4xl sm:text-5xl w-full text-center font-semibold mb-12 text-cyan-950">Welcome, Devin</h1>
         <div className='flex flex-col sm:flex-row gap-8 flex-wrap justify-center w-full'>
           <Tappable name="Journal" delay={0.05} route={'/journal'} icon={<VideoCameraIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
           <Tappable name="Scrapbook" delay={0.1} route={'/scrapbook'} icon={<PhotoIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
@@ -112,16 +122,16 @@ export default function Home() {
     );
 
     const upperPortion = useMemo(() => <UpperPortion/>, []);
+    const header = useMemo(() => <Header name={firstName}/>, [firstName]);
   
     return (
       <div className="w-full min-h-screen flex flex-col p-6 pt-10 items-center justify-center">
+      { loading ? <LoadingIndicator/> : 
+      <>
+        {header}
         { upperPortion }
 
         <div className="w-full max-w-4xl flex flex-col items-center gap-4 mt-20">
-        
-
-        { loading ? <LoadingIndicator/> : 
-        <>
           <div className="w-full h-6 bg-cyan-200 rounded-full overflow-hidden shadow-inner">
           <motion.div
             initial={{ width: '100%' }}
@@ -139,9 +149,9 @@ export default function Home() {
             { checkInButtonLoading ? <LoadingIndicator/> : 'Check in'}
           </button>
         </div>
+      </div>
         </>
         }
-      </div>
       </div>
     );
 }
