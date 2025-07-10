@@ -309,7 +309,7 @@ export default function Journal() {
             <div className='absolute p-6 w-full min-h-screen'>
                 <span onClick={() => router.push('/')} className='cursor-pointer flex flex-row gap-1 text-lg items-center font-medium'><ChevronLeftIcon className='w-6 h-6'/>Back</span>
             </div>
-            <div className="flex min-h-screen flex-col p-10 justify-center">
+            <div className="flex min-h-screen flex-col p-10 pt-20 sm:pt-40">
               
               { header1 }
               { recordButtons }

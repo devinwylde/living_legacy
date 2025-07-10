@@ -139,7 +139,7 @@ export default function RecordAudio() {
       };
 
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+        const blob = new Blob(chunksRef.current, { type: "audio/mp3" });
         const url = URL.createObjectURL(blob);
         setRecordedAudio({ blob, url });
         setStep("preview");
@@ -171,7 +171,7 @@ export default function RecordAudio() {
     };
 
     mediaRecorder.onstop = () => {
-      const blob = new Blob(chunksRef.current, { type: "audio/webm" });
+      const blob = new Blob(chunksRef.current, { type: "audio/mp3" });
       const url = URL.createObjectURL(blob);
       setRecordedAudio({ blob, url });
       setStep("preview");
@@ -318,7 +318,7 @@ export default function RecordAudio() {
       <div className="flex flex-col items-center gap-6 max-w-xl mx-auto">
         {title}
 
-        <div className="relative rounded-2xl overflow-hidden p-6 bg-white/40 backdrop-blur-2xl shadow-sm w-[640px]">
+        <div className="relative rounded-2xl overflow-hidden p-6 bg-white/40 backdrop-blur-2xl shadow-sm w-full max-w-[640px]">
           {step === "record" && (
             <div className="flex flex-col items-center">
               <canvas

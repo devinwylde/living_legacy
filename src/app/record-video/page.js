@@ -56,7 +56,7 @@ export default function RecordVideo() {
   };
 
   recorder.onstop = () => {
-    const blob = new Blob(chunksRef.current, { type: "video/webm" });
+    const blob = new Blob(chunksRef.current, { type: "video/mp4" });
     const url = URL.createObjectURL(blob);
     setRecordedVideo({ blob, url });
     setStep("preview");
@@ -212,10 +212,10 @@ const fetchContacts = async () => {
         { title }
 
         <div className="relative rounded-2xl overflow-hidden p-6 bg-white/40 backdrop-blur-2xl shadow-sm">
-        <div className="relative w-[640px] h-[480px] overflow-hidden rounded-xl">
+        <div className="relative w-full max-w-[640px] overflow-hidden rounded-xl">
         { step === 'record' &&
         <>
-          <video ref={videoRef} autoPlay muted className="w-[640px] h-[480px] bg-black" />
+          <video ref={videoRef} autoPlay muted className="w-full max-w-[640px] bg-black" />
           {recording && (
               <div className="absolute bottom-2 right-4 bg-black/60 backdrop-blur-sm shadow-sm text-white px-2 py-1 rounded-md font-mono text-xl">
               {formatTime(seconds)} / {formatTime(maxLen)}
@@ -245,7 +245,7 @@ const fetchContacts = async () => {
 
       {step === "preview" && recordedVideo && (
         <>
-          <div className="w-full flex flex-col gap-1">
+        <div className="w-full flex flex-col gap-1">
         <h1 className=" text-sm text-cyan-900">Entry Name</h1>
           <input
             type="text"

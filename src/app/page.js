@@ -90,22 +90,23 @@ export default function Home() {
       transition={{ duration: 0.5, delay }}
     >
       <div className='flex flex-col gap-4 items-center'>
-        <div onClick={() => router.push(route)} className='rounded-4xl bg-white/40 backdrop-blur-2xl shadow-sm w-48 h-48 flex items-center justify-center hover:scale-105 cursor-pointer transition-transform'>
+        <div onClick={() => router.push(route)} className='px-4 sm:px-0 rounded-4xl gap-4 bg-white/40 backdrop-blur-2xl shadow-sm w-full sm:w-48 h-24 sm:h-48 flex items-center justify-between sm:justify-center hover:scale-105 cursor-pointer transition-transform'>
           {icon}
+          <p className="flex sm:hidden text-center font-semibold text-3xl text-cyan-900">{name}</p>
         </div>
-        <p className="text-center font-semibold text-3xl text-cyan-900">{name}</p>
+        <p className="hidden sm:flex text-center font-semibold text-3xl text-cyan-900">{name}</p>
       </div>
     </motion.div>
   );
 
     const UpperPortion = () => (
       <>
-        <h1 className="text-5xl font-semibold mb-12 text-cyan-950">Welcome, Devin</h1>
-        <div className='flex flex-row gap-8'>
-          <Tappable name="Journal" delay={0.05} route={'/journal'} icon={<VideoCameraIcon className='w-32 h-32 fill-cyan-900'/>}/>
-          <Tappable name="Scrapbook" delay={0.1} route={'/scrapbook'} icon={<PhotoIcon className='w-32 h-32 fill-cyan-900'/>}/>
-          <Tappable name="Folder" delay={0.15} route={'/folder'} icon={<FolderIcon className='w-32 h-32 fill-cyan-900'/>}/>
-          <Tappable name="Settings" delay={0.2} route={'/settings'} icon={<CogIcon className='w-32 h-32 fill-cyan-900'/>}/>
+        <h1 className="text-4xl sm:text-5xl w-full text-center font-semibold mb-12 text-cyan-950">Welcome, Devin</h1>
+        <div className='flex flex-col sm:flex-row gap-8 flex-wrap justify-center w-full'>
+          <Tappable name="Journal" delay={0.05} route={'/journal'} icon={<VideoCameraIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
+          <Tappable name="Scrapbook" delay={0.1} route={'/scrapbook'} icon={<PhotoIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
+          <Tappable name="Folder" delay={0.15} route={'/folder'} icon={<FolderIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
+          <Tappable name="Settings" delay={0.2} route={'/settings'} icon={<CogIcon className='w-12 h-12 sm:w-32 sm:h-32 fill-cyan-900'/>}/>
         </div>
       </>
     );
@@ -113,7 +114,7 @@ export default function Home() {
     const upperPortion = useMemo(() => <UpperPortion/>, []);
   
     return (
-      <div className="w-full min-h-screen flex flex-col p-6 items-center justify-center">
+      <div className="w-full min-h-screen flex flex-col p-6 pt-10 items-center justify-center">
         { upperPortion }
 
         <div className="w-full max-w-4xl flex flex-col items-center gap-4 mt-20">

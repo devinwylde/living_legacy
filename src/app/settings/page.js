@@ -6,6 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { supabase } from "@/lib/supabaseClient";
 import LoadingIndicator from "../LoadingIndicator";
+import LoadingButton from "../LoadingButton";
 
 export default function Settings() {
   const router = useRouter();
@@ -101,7 +102,13 @@ export default function Settings() {
     fetchContacts();
   }, []);
 
-  const Header = () => (
+  const Header1 = () => (
+    <FadeUp delay={0.05}>
+      <h1 className="text-3xl font-semibold mb-6 text-cyan-950">Account Settings</h1>
+    </FadeUp>
+  );
+
+  const Header2 = () => (
     <FadeUp delay={0.05}>
       <h1 className="text-3xl font-semibold mb-6 text-cyan-950">Contacts</h1>
     </FadeUp>
@@ -230,9 +237,50 @@ const ContactTable = ({isLoading, contact_list}) => (
         )}</>
 );
 
-  const header = useMemo(() => <Header/>, []);
+const DetailsEditor = ({}) => {
+  const firstNameRef = useRef("");
+  const lastNameRef = useRef("");
+  const timeRef = useRef("");
+
+  const onSave = async () => {
+  };
+
+  return (
+    <FadeUp>
+      <div className="flex flex-col gap-3 max-w-md mt-4">
+        <input
+          className="w-full px-4 py-2 mt-1 border border-cyan-900 text-cyan-900 focus:outline-none focus:ring-0 focus:border-cyan-400 bg-[#b2e6eb] rounded-xl"
+          placeholder="First Name"
+          ref={firstNameRef}
+        />
+        <input
+          className="w-full px-4 py-2 mt-1 border border-cyan-900 text-cyan-900 focus:outline-none focus:ring-0 focus:border-cyan-400 bg-[#b2e6eb] rounded-xl"
+          placeholder="Last Name"
+          ref={lastNameRef}
+        />
+        <input
+          className="w-full px-4 py-2 mt-1 border border-cyan-900 text-cyan-900 focus:outline-none focus:ring-0 focus:border-cyan-400 bg-[#b2e6eb] rounded-xl"
+          placeholder="Check In Period"
+          ref={timeRef}
+        />
+        <div className="flex gap-3 mt-2">
+          <button
+            onClick={onSave}
+            className="cursor-pointer bg-cyan-800 hover:bg-cyan-700 text-white px-4 py-2 rounded-md"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </FadeUp>
+  );
+}
+
+  const header1 = useMemo(() => <Header1/>, []);
+  const header2 = useMemo(() => <Header2/>, []);
   const adder = useMemo(() => <Adder isAdding={adding}/>, [adding]);
   const table = useMemo(() => <ContactTable isLoading={loading} contact_list={contacts}/>, [loading, contacts]);
+  const detailsEditor = useMemo(() => <DetailsEditor/>, []);
 
   return (
     <div className="relative min-h-screen">
@@ -245,8 +293,11 @@ const ContactTable = ({isLoading, contact_list}) => (
           <ChevronLeftIcon className="w-6 h-6" /> Back
         </span>
 
-        <div className="p-4 pt-20">
-            {header}
+        <div className="p-4 pt-10 sm:pt-20">
+            {header1}
+            {detailsEditor}
+            <div className="pt-10"/>
+            {header2}
             {table}
             {adder}
         
