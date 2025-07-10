@@ -250,7 +250,7 @@ export default function Journal() {
     <>
       { isLoading ? <FadeUp delay={0.2}><LoadingIndicator/></FadeUp> :
         <div className='flex flex-row flex-wrap gap-6'>
-        {entries.length === 0 ? <FadeUp delay={0.1}><p>You haven't recorded any journals yet!</p></FadeUp> : entries.map(entry => (
+        {entries.length === 0 ? <FadeUp delay={0.1}><p>You haven&apos;t recorded any journals yet!</p></FadeUp> : entries.map(entry => (
           <TappableEntry key={entry.id} entry={entry}/>
         ))}
         </div>
@@ -333,7 +333,7 @@ export default function Journal() {
                   </video>
                 )}
                 <p className='font-medium text-base mt-2'>{readableDate(openedJournal.uploaded_at)}</p>
-                {openedJournal.description && <p className='font-medium text-lg italic'>"{openedJournal.description}"</p>}
+                {openedJournal.description && <p className='font-medium text-lg italic'>&quot;{openedJournal.description}&quot;</p>}
                 </div>
               </div>
             }
