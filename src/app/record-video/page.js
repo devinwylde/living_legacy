@@ -215,7 +215,7 @@ const fetchContacts = async () => {
         <div className="relative w-full max-w-[640px] overflow-hidden rounded-xl">
         { step === 'record' &&
         <>
-          <video ref={videoRef} autoPlay muted className="w-full max-w-[640px] bg-black" />
+          <video ref={videoRef} autoPlay muted className="w-full max-w-[640px] bg-black transform scale-x-[-1]" />
           {recording && (
               <div className="absolute bottom-2 right-4 bg-black/60 backdrop-blur-sm shadow-sm text-white px-2 py-1 rounded-md font-mono text-xl">
               {formatTime(seconds)} / {formatTime(maxLen)}
@@ -224,7 +224,7 @@ const fetchContacts = async () => {
         </>
         }
         { step === 'preview' && recordedVideo &&
-        <video controls preload="metadata" src={recordedVideo.url} className="w-full rounded-xl border shadow-md" />
+        <video controls preload="metadata" src={recordedVideo.url} className="w-full rounded-xl border shadow-md"/>
         }
         </div>
         </div>
