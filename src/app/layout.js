@@ -8,15 +8,18 @@ const inter = Inter({
 
 export const metadata = {
   title: {
-    default: 'Living Legacy',
-    template: '%s | Living Legacy',
+    default: 'Mementa',
+    template: '%s | Mementa',
   },
-  description: 'Let your life live on.',
+  description: 'A legacy that lives on.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="icon.png" sizes="any"/>
+      </head>
       <body className={`${inter.variable} antialiased`}>
         {children}
       </body>

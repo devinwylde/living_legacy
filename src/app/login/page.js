@@ -50,7 +50,7 @@ export default function LoginPage() {
       <form onSubmit={handleLogin} className="bg-white/60 backdrop-blur-2xl shadow-sm items-center flex flex-col rounded-lg p-8 max-w-sm w-full space-y-6">
         <Image
             src="/logo.png"
-            className='w-32'
+            className='w-48'
             width={914}
             height={369}
             alt="logo"
